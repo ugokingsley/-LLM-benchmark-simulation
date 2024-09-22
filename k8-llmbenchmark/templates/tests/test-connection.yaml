@@ -1,0 +1,20 @@
+{{- if .Values.service.port }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "k8-llmbenchmark.fullname" . }}-test-connection"
+  labels:
+    {{- include "k8-llmbenchmark.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "k8-llmbenchmark.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
+{{- else }}
+# Fallback or error if service.port is missing
+{{- fail "service.port is not set in values.yaml" }}
+{{- end }}

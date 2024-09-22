@@ -1,0 +1,20 @@
+database_url: "postgresql://postgres:grace_123@localhost:5432/llm_benchmark"
+api_key: "mysecureapikey"
+service:
+  port: 8000
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+ingress:
+  enabled: true
+  annotations: {}
+  hosts:
+    - host: k8-llmbenchmark.local
+      paths: ["/"]
+  tls: []

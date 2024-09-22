@@ -1,0 +1,7 @@
+{{- if .Values.ingress.enabled -}}
+Your application is configured to use an ingress. Access it via the following DNS name:
+{{ index .Values.ingress.hosts 0 "host" }}
+{{- else -}}
+Your application is accessible via the following NodePort:
+  {{ .Values.service.externalPort }}
+{{- end -}}

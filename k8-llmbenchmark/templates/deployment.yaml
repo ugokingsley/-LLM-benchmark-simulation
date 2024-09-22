@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-k8-llmbenchmark
+spec:
+  replicas: 3  # Scaling the number of replicas
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-k8-llmbenchmark
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-k8-llmbenchmark
+    spec:
+      containers:
+        - name: k8-llmbenchmark
+          image: kingsley5911/llm-benchmark:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: k8-llmbenchmark-secrets
+          readinessProbe:
+            httpGet:
+              path: /docs
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /docs
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20

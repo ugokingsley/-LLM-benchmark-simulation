@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-k8-llmbenchmark-service
+spec:
+  selector:
+    app: {{ .Release.Name }}-k8-llmbenchmark
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
