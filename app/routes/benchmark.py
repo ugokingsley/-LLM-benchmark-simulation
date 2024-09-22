@@ -28,3 +28,29 @@ def get_api_key(api_key: str = Header(...)):
 def generate_data(api_key: str = Depends(get_api_key), db: Session = Depends(get_db)):
     generate_random_data(db)
     return {"message": "Random benchmark data generated successfully."}
+
+
+# API endpoint to fetch rankings for a specific metric
+@retry_on_failure
+@router.get("/rankings/{metric}")
+def get_rankings(
+    metric: str, api_key: str = Depends(get_api_key), db: Session = Depends(get_db)
+):
+    results = (
+        db.query(
+            LLM_Benchmark.llm_name, func.avg(LLM_Benchmark.value).label("mean_value")
+        )
+        .filter(LLM_Benchmark.metric_name == metric)
+        .group_by(LLM_Benchmark.llm_name)
+        .order_by("mean_value")
+        .all()
+    )
+
+    if not results:
+        raise HTTPException(
+            status_code=404, detail="No data found for the specified metric."
+        )
+
+    result_dict = {row[0]: row[1] for row in results}
+
+    return {"rankings": result_dict}
