@@ -39,6 +39,7 @@ docker-compose up --build
   ```bash
   alembic upgrade head
   ```
+
 ## API Endpoints
 The FastAPI application exposes the following endpoints:
 
@@ -82,6 +83,9 @@ curl -X 'GET' \
 
 <img width="873" alt="image" src="https://github.com/user-attachments/assets/208c28be-60a9-45ff-bf82-ec39096355a0">
 
+## Metric Visualization
+The FastAPI application also contains a visualization of the LLM Metrics:
+<img width="949" alt="image" src="https://github.com/user-attachments/assets/08c6c79b-508b-45bb-8528-ed4a6c3bfee0">
 
 ## Monitoring with Prometheus and Grafana
 ### Prometheus Setup
