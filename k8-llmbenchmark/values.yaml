@@ -18,3 +18,10 @@ ingress:
     - host: k8-llmbenchmark.local
       paths: ["/"]
   tls: []
+prometheus:
+  enabled: true
+grafana:
+  enabled: true
+  adminPassword: "rZWoP9TaWM94bdc5oRje8HUR147r36g64poRIx4v"
+  service:
+    type: ClusterIP
