@@ -72,3 +72,67 @@ curl -X 'GET' \
   -H 'accept: application/json'
 ```
 
+
+## Monitoring with Prometheus and Grafana
+### Prometheus Setup
+#### Install Prometheus using Helm:
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install prometheus prometheus-community/prometheus
+```
+
+The Prometheus service will be exposed, and you can access it via:
+```bash http://localhost:9090```
+
+#### Grafana Setup
+##### Install Grafana using Helm:
+
+```bash helm repo add grafana https://grafana.github.io/ ```
+
+##### helm-charts
+```bash helm install grafana grafana/grafana```
+
+##### Retrieve the Grafana admin password:
+
+```bash kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo```
+
+##### Access Grafana at:
+```bash http://localhost:3000 ```
+
+##### Configure Grafana to use Prometheus as a data source.
+
+
+### Kubernetes Deployment
+### Step 1: Install Helm
+Make sure Helm is installed. You can install it by running:
+```bash 
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+```
+
+### Step 2: Deploy the Application
+#### Initialize a Kubernetes cluster if not already running (use minikube, Docker Desktop, or any cloud Kubernetes provider).
+
+##### Install the application using Helm:
+```bash
+helm install k8-llmbenchmark ./k8-llmbenchmark
+ ```
+
+##### The application will be exposed through an ingress (or use a NodePort/LoadBalancer service based on your configuration).
+
+### Step 3: Check Application Status
+#### To check the status of the deployment:
+```bash
+kubectl get pods
+kubectl get services
+ ```
+
+### Helm Charts
+#### This project includes Helm charts to deploy the FastAPI app. You can find the Helm charts in the k8-llmbenchmark/ directory.
+
+#### Installing the Charts
+```bash
+helm install k8-llmbenchmark ./k8-llmbenchmark
+
+ ```
+
