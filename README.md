@@ -35,7 +35,10 @@ cp .env.example .env
 ```bash
 docker-compose up --build
 ```
-
+- Once inside the container, you can run Alembic migrations 
+  ```bash
+  alembic upgrade head
+  ```
 ## API Endpoints
 The FastAPI application exposes the following endpoints:
 
