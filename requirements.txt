@@ -7,3 +7,5 @@ alembic
 pydantic-settings
 black
 prometheus-fastapi-instrumentator
+jinja2 
+plotly

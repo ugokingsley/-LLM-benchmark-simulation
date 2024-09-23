@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Header
+from fastapi import APIRouter, Depends, HTTPException, Header, Request
 from sqlalchemy.orm import Session
 from app.models import LLM_Benchmark
 from sqlalchemy import func
@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 import os
 from app.database import get_db
 from .random_generator import generate_random_data, retry_on_failure
+import plotly.graph_objects as go
+from fastapi.templating import Jinja2Templates
+
+
+templates = Jinja2Templates(directory="app/templates")
 
 # Load environment variables
 load_dotenv()
@@ -54,3 +59,41 @@ def get_rankings(
     result_dict = {row[0]: row[1] for row in results}
 
     return {"rankings": result_dict}
+
+
+# Dashboard route to render data visualizations
+@router.get("/dashboard")
+async def dashboard(request: Request, db: Session = Depends(get_db)):
+    # Fetch average metric values from the database
+    results = (
+        db.query(
+            LLM_Benchmark.llm_name,
+            LLM_Benchmark.metric_name,
+            func.avg(LLM_Benchmark.value).label("avg_value"),
+        )
+        .group_by(LLM_Benchmark.llm_name, LLM_Benchmark.metric_name)
+        .all()
+    )
+
+    # Structure data for Plotly
+    llm_names = list(set([result.llm_name for result in results]))
+    metrics = list(set([result.metric_name for result in results]))
+
+    plot_data = []
+    for metric in metrics:
+        metric_values = [
+            result.avg_value for result in results if result.metric_name == metric
+        ]
+        plot_data.append(go.Bar(name=metric, x=llm_names, y=metric_values))
+
+    # Combine plots for a grouped bar chart
+    fig = go.Figure(data=plot_data)
+    fig.update_layout(barmode="group")
+
+    # Convert the plot to JSON to pass to the template
+    plot_json = fig.to_json()
+
+    # Render the dashboard with the plot data
+    return templates.TemplateResponse(
+        "dashboard.html", {"request": request, "plot_data": plot_json}
+    )

@@ -1,0 +1,21 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Benchmark Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <h1>LLM Benchmark Dashboard</h1>
+    <div id="plotly-graph"></div>
+    <script>
+        var plot_data = {{ plot_data | safe }};
+        Plotly.newPlot('plotly-graph', plot_data);
+    </script>
+</body>
+
+</html>

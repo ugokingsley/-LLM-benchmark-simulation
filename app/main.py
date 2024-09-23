@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from app.routes import benchmark
 from prometheus_fastapi_instrumentator import Instrumentator
 
-
 app = FastAPI(debug=True)
 
 # Include the benchmark routes
