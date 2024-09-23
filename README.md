@@ -54,6 +54,9 @@ curl -X 'GET' \
   -H 'api-key: mysecureapikey'
 ```
 
+<img width="899" alt="image" src="https://github.com/user-attachments/assets/a379ab49-c22a-4e17-9a16-a80c7028867a">
+
+
 ### Rank Metric
 - GET /api/rankings/{metric} -  API endpoint that returns the ranking of LLMs for a given metric.
 
@@ -65,6 +68,8 @@ curl -X 'GET' \
   -H 'api-key: mysecureapikey'
 ```
 
+<img width="886" alt="image" src="https://github.com/user-attachments/assets/c6f0e50a-fe84-455b-ac0f-f35140362f78">
+
 ### Prometheus scrape:
 - GET /metrics -  API endpoint This exposes a /metrics endpoint that Prometheus can scrape.
 
@@ -74,6 +79,8 @@ curl -X 'GET' \
   'http://localhost:8000/metrics' \
   -H 'accept: application/json'
 ```
+
+<img width="873" alt="image" src="https://github.com/user-attachments/assets/208c28be-60a9-45ff-bf82-ec39096355a0">
 
 
 ## Monitoring with Prometheus and Grafana
