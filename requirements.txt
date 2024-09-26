@@ -9,3 +9,5 @@ black
 prometheus-fastapi-instrumentator
 jinja2 
 plotly
+pytest
+httpx
