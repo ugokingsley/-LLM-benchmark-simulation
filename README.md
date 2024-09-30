@@ -21,14 +21,14 @@ This project is a FastAPI application that benchmarks various Language Learning 
 
 ## Clone the repository
 ```bash
-https://github.com/ugokingsley/-LLM-benchmark-simulation.git
-cd -LLM-benchmark-simulation
+https://github.com/ugokingsley/llm-benchmark-simulation.git
+cd llm-benchmark-simulation
 cp .env.example .env
 ```
 
 ## Running the Application
 ### Using Docker Compose
-- Set up a PostgreSQL DB with PGAdmin with the DB credentials as stated in the .env file
+- Set up a PostgreSQL DB with PGAdmin with the DB credentials as stated in the .env file to view tables
 - Ensure you have Docker installed.
 - Run the application:
 
@@ -44,13 +44,13 @@ docker-compose up --build
 The FastAPI application exposes the following endpoints:
 
 ### Generate data points
-- GET /api/generate_data -  API endpoint to generate 1,000 data points for each LLM against each given metric.
+- GET /api/generate-data -  API endpoint to generate 1,000 data points for each LLM against each given metric.
 (for demonstration)
 
 #### Example request:
 ```bash
 curl -X 'GET' \
-  'http://localhost:8000/api/generate_data' \
+  'http://localhost:8000/api/generate-data' \
   -H 'accept: application/json' \
   -H 'api-key: mysecureapikey'
 ```

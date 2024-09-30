@@ -2,8 +2,8 @@
 import pytest
 from sqlalchemy.orm import Session
 
-from app.models import LLM_Benchmark
 from app.database import get_db
+from app.models import LLM_Benchmark
 
 
 # Test that the /dashboard endpoint works

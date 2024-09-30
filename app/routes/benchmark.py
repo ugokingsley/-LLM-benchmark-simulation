@@ -1,14 +1,16 @@
-from fastapi import APIRouter, Depends, HTTPException, Header, Request
-from sqlalchemy.orm import Session
-from app.models import LLM_Benchmark
-from sqlalchemy import func
-from dotenv import load_dotenv
 import os
-from app.database import get_db
-from .random_generator import generate_random_data, retry_on_failure
-import plotly.graph_objects as go
-from fastapi.templating import Jinja2Templates
 
+import plotly.graph_objects as go
+from dotenv import load_dotenv
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
+from fastapi.templating import Jinja2Templates
+from sqlalchemy import func
+from sqlalchemy.orm import Session
+
+from app.database import get_db
+from app.models import LLM_Benchmark
+
+from .random_generator import generate_random_data, retry_on_failure
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -29,7 +31,7 @@ def get_api_key(api_key: str = Header(...)):
 
 
 # API endpoint to trigger random data generation (for demonstration)
-@router.get("/generate_data")
+@router.get("/generate-data")
 def generate_data(api_key: str = Depends(get_api_key), db: Session = Depends(get_db)):
     generate_random_data(db)
     return {"message": "Random benchmark data generated successfully."}
