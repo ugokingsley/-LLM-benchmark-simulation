@@ -15,7 +15,7 @@ This project is a FastAPI application that benchmarks various Language Learning 
 - Kubernetes (minikube, Docker Desktop, or cloud provider)
 - Helm
 - Prometheus and Grafana (optional for monitoring)
-- Python 3.8+
+- Python 3.12
 - PostgreSQL (used for storing benchmark data)
 
 ## Clone the repository
