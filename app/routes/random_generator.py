@@ -1,5 +1,6 @@
 import random
 import time
+from typing import List
 
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
@@ -29,7 +30,7 @@ def retry_on_failure(func):
 # Random data generation with seeding
 @retry_on_failure
 def generate_random_data(db: Session, seed_value=42):
-    llms = [
+    llms: list[str] = [
         "GPT-4o",
         "Llama 3.1 405",
         "Mistral Large2",

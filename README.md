@@ -1,6 +1,5 @@
 
 # FastAPI LLM Benchmarking Tool
-
 This project is a FastAPI application that benchmarks various Language Learning Models (LLMs) based on performance metrics such as Time to First Token (TTFT), Tokens Per Second (TPS), End-to-End Latency (e2e_latency), and Requests Per Second (RPS). The application is deployed using Kubernetes with Helm charts and includes monitoring through Prometheus and Grafana.
 
 ## Features
@@ -36,9 +35,9 @@ cp .env.example .env
 docker-compose up --build
 ```
 - Once inside the container, you can run Alembic migrations 
-  ```bash
+```bash
   alembic upgrade head
-  ```
+```
 
 ## API Endpoints
 The FastAPI application exposes the following endpoints:
@@ -111,7 +110,7 @@ The Prometheus service will be exposed, and you can access it via:
 ```bash kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo```
 
 ##### Access Grafana at:
-```bash http://localhost:3000 ```
+> bash http://localhost:3000
 
 ##### Configure Grafana to use Prometheus as a data source.
 
@@ -121,7 +120,6 @@ The Prometheus service will be exposed, and you can access it via:
 Make sure Helm is installed. You can install it by running:
 ```bash 
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-
 ```
 
 ### Step 2: Deploy the Application
@@ -130,7 +128,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 ##### Install the application using Helm:
 ```bash
 helm install k8-llmbenchmark ./k8-llmbenchmark
- ```
+```
 
 ##### The application will be exposed through an ingress (or use a NodePort/LoadBalancer service based on your configuration).
 
@@ -139,7 +137,7 @@ helm install k8-llmbenchmark ./k8-llmbenchmark
 ```bash
 kubectl get pods
 kubectl get services
- ```
+```
 
 ### Helm Charts
 #### This project includes Helm charts to deploy the FastAPI app. You can find the Helm charts in the k8-llmbenchmark/ directory.
@@ -147,6 +145,5 @@ kubectl get services
 #### Installing the Charts
 ```bash
 helm install k8-llmbenchmark ./k8-llmbenchmark
-
- ```
+```
 
