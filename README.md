@@ -88,6 +88,11 @@ curl -X 'GET' \
 
 ## Metric Visualization
 The FastAPI application also contains a visualization of the LLM Metrics:
+```bash
+curl -X 'GET' \
+  'http://localhost:8000/api/dashboard' \
+  -H 'accept: application/json'
+```
 <img width="949" alt="image" src="https://github.com/user-attachments/assets/08c6c79b-508b-45bb-8528-ed4a6c3bfee0">
 
 ## Monitoring with Prometheus and Grafana
