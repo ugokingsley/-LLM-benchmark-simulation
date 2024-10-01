@@ -38,6 +38,10 @@ docker-compose up --build
 ```bash
   alembic upgrade head
 ```
+- or run this command:
+```bash
+docker-compose exec api alembic upgrade head
+```
 
 ## API Endpoints
 The FastAPI application exposes the following endpoints:
